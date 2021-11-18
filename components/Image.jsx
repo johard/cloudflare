@@ -4,7 +4,7 @@ const cloudflareImageLoader = ({ src, width, quality }) => {
   if (!quality) {
     quality = 75
   }
-  return `https://images.srvcio.workers.dev?width=${width}&quality=${quality}&image=https://srvc.io${src}`
+  return `https://images.srvcio.workers.dev?width=${width}&quality=${quality}&image=https://cloudflare-3ks.pages.dev${src}`
 }
 
 export default function Img(props) {
