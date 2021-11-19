@@ -1,10 +1,8 @@
-// GET requests to /filename would return "Hello, world!"
-export const onRequestGet = () => {
-  return new Response("Hello, world!")
+export async function onRequest(context) {
+  console.log(context)
+  const json = {
+    data: 'Hello World'
+  }
+  return new Response(JSON.stringify(json), { headers: { "Content-Type": "application/json" } })
 }
 
-// POST requests to /filename with a JSON-encoded body would return "Hello, <name>!"
-export const onRequestPost = async ({ request }) => {
-  const { name } = await request.json()
-  return new Response(`Hello, ${name}!`)
-}

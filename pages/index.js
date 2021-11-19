@@ -2,7 +2,8 @@ import Head from 'next/head'
 import Image from 'components/Image';
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+const Home = ({ json }) => {
+  console.log({ json })
   return (
     <div className={styles.container}>
       <Head>
@@ -13,7 +14,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          {json.data}
         </h1>
 
         <p className={styles.description}>
@@ -67,3 +68,12 @@ export default function Home() {
     </div>
   )
 }
+
+Home.getInitialProps = async (ctx) => {
+  console.log(process.env.NODE_ENV)
+  const res = await fetch((process.env.NODE_ENV === 'development' ? 'http://localhost:8788' : '') + '/api/hello')
+  const json = await res.json()
+  return { json }
+}
+
+export default Home
