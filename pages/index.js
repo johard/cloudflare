@@ -71,7 +71,7 @@ const Home = ({ json }) => {
 
 Home.getInitialProps = async (ctx) => {
   console.log(process.env.NODE_ENV)
-  const res = await fetch((process.env.NODE_ENV === 'development' ? 'http://localhost:8788' : '') + '/api/hello')
+  const res = await fetch((process.env.NODE_ENV === 'development' ? 'http://localhost:8788' : 'https://cloudflare-3ks.pages.dev') + '/api/hello')
   const json = await res.json()
   return { json }
 }
