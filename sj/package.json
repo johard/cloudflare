@@ -14,8 +14,6 @@
   },
   "dependencies": {
     "@types/luxon": "^3.3.0",
-    "@types/node-fetch": "2",
-    "luxon": "^3.3.0",
-    "node-fetch": "2"
+    "luxon": "^3.3.0"
   }
 }

@@ -1,10 +1,6 @@
-import fetch from 'node-fetch';
 import { DateTime } from 'luxon';
 
 const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36';
-
-// const Cookie =
-//   'X-api.sj.se-session-v19=Iw_kJAWatUk_SiLq2J6RgQt18OV1rF-1XgqPW6UZeLd_eNpjcgzwjA_wNmRmYirO0itOZWYqSKzMyy9L1EvOz2VmZgLBYC_dYFdmJgVmppAgxzBXHx_XIGYmQzMLQ2NzM0tTCwtjY4g6CHQNcwNRaYk5INOYAf1SEoY;X-api.sj.se-service=EnjaY3IM8IwP8DZkZjIxM7VgZjIwYGYKYAYAMMoDoQ';
 
 const headers = {
   'Content-Type': 'application/json',
@@ -148,7 +144,7 @@ export const search = async (date: string) => {
     headers,
     method: 'GET',
   });
-  console.log({ res });
+
   const json = (await res.json()) as {
     suppliers: Supplier[];
   };
