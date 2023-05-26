@@ -35,6 +35,25 @@ interface Journey {
   itineraries: string[];
 }
 
+interface Price {
+  journeyReference: string;
+  salesCategoryPrice: {
+    SEAT: {
+      COMFORT: {
+        FIX: {
+          journeyPriceDescription: {
+            soldOut: string;
+            basePrice: {
+              amount: string;
+              currency: string;
+            };
+          };
+        };
+      };
+    };
+  };
+}
+
 interface Supplier {
   supplier: string;
   supplierData: {
@@ -50,7 +69,7 @@ const getPrice = async (pricingStandardToken: string, journeyToken: string, Cook
     },
     method: 'GET',
   });
-  const json = await res.json();
+  const json = (await res.json()) as Price;
   return json;
 };
 
@@ -121,9 +140,17 @@ const searchData = async (date: string, Cookie: string) => {
     },
     method: 'POST',
   });
-  const json = await res.json();
+  const json = (await res.json()) as {
+    errors?: string[];
+    timetableToken: string;
+    pricingTokens: {
+      STANDARD: {
+        token: string;
+      };
+    };
+  };
 
-  if (json.errors?.length) {
+  if (json.errors && json.errors.length) {
     return {
       journeys: [],
       prices: [],
@@ -153,7 +180,7 @@ export const search = async (date: string) => {
     return supplier.supplier === 'sj';
   });
 
-  const cookies = supplier?.supplierData.cookies;
+  const cookies = supplier ? supplier.supplierData.cookies : [];
 
   const parsedCookies = cookies
     ?.map((cookie) => {
@@ -176,7 +203,7 @@ export const search = async (date: string) => {
 
     let firstClass = 'Not found';
 
-    if (foundPrice?.salesCategoryPrice) {
+    if (foundPrice && foundPrice.salesCategoryPrice) {
       firstClass =
         foundPrice.salesCategoryPrice.SEAT.COMFORT.FIX.journeyPriceDescription &&
         !foundPrice.salesCategoryPrice.SEAT.COMFORT.FIX.journeyPriceDescription.soldOut
