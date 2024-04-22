@@ -5,7 +5,7 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname.startsWith('/api/')) {
-      return apiRouter.handle(request);
+      return apiRouter.handle(request, env, ctx);
     }
 
     return new Response(JSON.stringify({ hello: 'world' }), {

@@ -3,9 +3,9 @@ main = "src/worker.ts"
 compatibility_date = "2023-05-24"
 
 # # KV Namespace binding - For more information: https://developers.cloudflare.com/workers/runtime-apis/kv
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+kv_namespaces = [
+  { binding = "MY_KV_NAMESPACE", id = "6b659190228b4ea0bd46b5fe236d0da1", preview_id = "5b1dab0465014ccfac5b9ae01a1e44df" }
+]
 
 # # Durable Object binding - For more information: https://developers.cloudflare.com/workers/runtime-apis/durable-objects
 # [[durable_objects]]
@@ -13,10 +13,14 @@ compatibility_date = "2023-05-24"
 # class_name = "MyDurableObject"
 
 # # Bucket binding - For more information: https://developers.cloudflare.com/workers/runtime-apis/kv#bucket
-# [[buckets]]
-# binding = "MY_BUCKET"
-# name = "my-bucket"
-# bucket_id = "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+r2_buckets = [
+  { binding = "MY_BUCKET", bucket_name = "next-full-stack-srvc-io", preview_bucket_name = "next-full-stack-srvc-io-preview" }
+]
+
+d1_databases = [
+  { binding = "MY_DB", database_name = "next-full-stack-srvc-io", database_id = "f5abdc2a-a238-4c61-90b1-2b208fdba1aa", preview_database_id = "923fc0d2-6a5b-4f4b-bf44-09b671ef45d7" }
+]
+
 
 # # Service binding - For more information: https://developers.cloudflare.com/workers/platform/services
 # [[routes]]
